@@ -1,6 +1,7 @@
 const sessionName = "Talha";
 const owner = ["966541433942"];
 const QRCode = require("qrcode");
+require('./ham')
 const {
   default: sansekaiConnect,
   useMultiFileAuthState,
