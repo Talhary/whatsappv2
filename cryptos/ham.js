@@ -58,7 +58,7 @@ const func = async (url) => {
       await page.screenshot({ path: './images/'+i+'screenshot.png' });
         setTimeout(()=>{
           require('fs').unlinkSync('./images/'+i+'screenshot.png')
-        },5000)
+        },15000)
       i=i+1
   } catch (error) {
      console.log(error)

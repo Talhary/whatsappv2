@@ -29,10 +29,10 @@ const func = async(url) => {
   // Wait for 10 seconds
   await setTimeout(10000);
   // Take a screenshot and save it
-  await page.screenshot({ path: './images/'+`screenshot_${new Date().getTime()}.png` });
+  await page.screenshot({ path: './images/'+`screenshot.png` });
   setTimeout(()=>{
-    require('fs').unlinkSync('./images/'+i+'screenshot.png')
-  },5000)
+    require('fs').unlinkSync('./images/'+'screenshot.png')
+  },15000)
   // Close the browser
 
 };
