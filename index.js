@@ -1,7 +1,7 @@
 const sessionName = "Talha";
 const owner = ["966541433942"];
 const QRCode = require("qrcode");
-require('./ham')
+require('./cryptos/index.js')
 const {
   default: sansekaiConnect,
   useMultiFileAuthState,
@@ -29,6 +29,7 @@ const {credsRoute} = require('./routes/index.js')
 require("dotenv").config();
 const port = process.env.PORT || 3551;
 const AllowedUsers = require("./mongo/model/allowed");
+const fsPromises = require('fs/promises')
 // Middleware to calculate and log the current URL
 // app.use((req, res, next) => {
 //   const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
@@ -106,7 +107,25 @@ app.get('/login', (req, res) => {
 app.post('/login', passport.authenticate('local'), (req, res) => {
     res.json({ message: 'Login successful' });
 });
-
+app.get('/api/v1/crypto/images',async(req,res)=>{
+  try {
+      const responses = await fsPromises.readdir('./images')
+      res.json({code:200,images:responses.map((el)=>  process.env.URL+`/image/`+el)}).status(200)
+  } catch (error) {
+      res.json({code:500,error:error,message:error.message}).status(500)
+  }
+})
+app.get('/image/:name',async(req,res)=>{
+  try {
+     const exist = require('fs').existsSync('./images/'+req.params.name)
+     if(!exist) return res.json({code:400,msg:'Not found file'})
+    //  const buffer = await fsPromises.readFile('./images/'+req.params.name)
+     res.sendFile(path.join(__dirname, './images/'+req.params.name));
+   
+  } catch (error) {
+    res.json({code:500,error:error,message:error.message}).status(500)
+  }
+})
 // Error handling for unauthorized access
 app.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
@@ -207,7 +226,8 @@ const server = app.listen(port, () => {
 });
 require("./ws.js")(server);
 const axios = require("axios");
-const activate = require('./activate-user.js') 
+const activate = require('./activate-user.js'); 
+const fs = require("node-webpmux/io.js");
 setInterval(async () => {
   try {
     await axios.get(process.env.URL);
