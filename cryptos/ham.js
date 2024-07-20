@@ -53,7 +53,7 @@ const func = async (url,i) => {
       // Navigate to the desired URL
       await page.goto(url);
       // Wait for 10 seconds
-      await setTimeout(10000);
+      await setTimeout(20000);
       // Take a screenshot and save it
 
       await page.screenshot({ path: './images/'+i+'Hamand2nd.png' });
@@ -69,4 +69,4 @@ const func = async (url,i) => {
 
 setInterval(() => {
   urls.forEach((url,i) => func(url,i));
-}, 15000);
+}, 60000);
