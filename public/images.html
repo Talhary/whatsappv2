@@ -1,65 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
-    <style>
-        body {
-    display:hidden;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 10px;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery with Error Handling</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 10px;
+    }
 
-#gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
 
-#gallery img {
-    width: auto;
-    height:auto;
-    object-fit: cover;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    #gallery img {
+      width: 200px; /* Set a fixed width for consistency */
+      height: auto;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-    </style>
+    .error-dialog {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <div id="gallery"></div>
-    <script>
-          const  host = window.location.protocol + "//" + window.location.host;
-   const url = host;
+  <div id="gallery"></div>
 
-    fetch(url+"/api/v1/crypto/images")
+  <div class="error-dialog" id="errorDialog">
+    <p>An error occurred while fetching images. Please try again later.</p>
+    <button id="closeButton">Close</button>
+  </div>
+
+  <script>
+    const host = window.location.protocol + "//" + window.location.host;
+    const url = host + "/api/v1/crypto/images";
+
+    function fetchImages() {
+      fetch(url)
         .then(response => response.json())
         .then(data => {
-            if (data.code === 200) {
-                const gallery = document.getElementById("gallery");
-                const images = data.images.reverse();
+          if (data.code === 200) {
+            const gallery = document.getElementById("gallery");
+            const images = data.images.reverse();
 
-                images.forEach(image => {
-                    const imgElement = document.createElement("img");
-                    imgElement.src = image;
-                    gallery.appendChild(imgElement);
-                });
-            } else {
-                console.error("Failed to load images");
-            }
+            images.forEach(image => {
+              const imgElement = document.createElement("img");
+              imgElement.src = image;
+              gallery.appendChild(imgElement);
+            });
+          } else {
+            console.error("Failed to load images");
+            showErrorDialog();
+          }
         })
-        .catch(error => console.error("Error fetching images:", error));
+        .catch(error => {
+          console.error("Error fetching images:", error);
+          showErrorDialog();
+        });
+    }
 
+    function showErrorDialog() {
+      const errorDialog = document.getElementById("errorDialog");
+      errorDialog.style.display = "block"; // Make the dialog visible
+    }
 
-    </script>
+    function closeErrorDialog() {
+      const errorDialog = document.getElementById("errorDialog");
+      errorDialog.style.display = "none"; // Hide the dialog
+    }
+
+    // Call fetchImages initially and set an interval for continuous fetching
+    fetchImages();
+    setInterval(fetchImages, 1000); // Fetch images every 5 seconds
+
+    const closeButton = document.getElementById("closeButton");
+    closeButton.addEventListener("click", closeErrorDialog);
+  </script>
 </body>
 </html>
