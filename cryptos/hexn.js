@@ -21,7 +21,7 @@ const claim = async()=>{
   "referrerPolicy": "no-referrer",
   "body": "{\"platform\":\"WEB\",\"farming_uuid\":\"6934a043-62e2-486f-ae73-e8ee6ed5651b\"}",
   "method": "POST"
-}).then(res=>res.json()).then(res=>console.log(res))
+}).then(res=>res.json()).then(res=>console.log(res)).catch(err=>console.log(err))
 }
 
 const axios = require('axios');
@@ -51,10 +51,24 @@ const startFarming = ()=>{
   "referrerPolicy": "no-referrer",
   "body": "{\"platform\":\"WEB\"}",
   "method": "POST"
-}).then(res=>res.json()).then(res=>console.log(res))
+}).then(res=>res.json()).then(res=>console.log(res)).catch(err=>console.log(err))
 }
 
-
+const token = async()=>{
+  fetch("https://api.hexn.cc/v1/kyc/auth/refresh-token", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-GB,en;q=0.9,en-US;q=0.8",
+    "priority": "u=1, i",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrerPolicy": "no-referrer",
+  "body": null,
+  "method": "OPTIONS"
+});
+}
 
 
 setInterval(()=>{

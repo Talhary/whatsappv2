@@ -31,7 +31,7 @@ const launchBrowser = async()=>{
 } 
 
 const userAgent = 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Mobile Safari/537.36';
-let i = 0
+
 const func = async (url) => {
   // Launch the browser
   try {
@@ -55,11 +55,9 @@ const func = async (url) => {
       // Wait for 10 seconds
       await setTimeout(10000);
       // Take a screenshot and save it
-      await page.screenshot({ path: './images/'+i+'screenshot.png' });
-        setTimeout(()=>{
-          require('fs').unlinkSync('./images/'+i+'screenshot.png')
-        },15000)
-      i=i+1
+      await page.screenshot({ path: './images/Hamand2nd.png' });
+     
+    
   } catch (error) {
      console.log(error)
   }

@@ -29,10 +29,8 @@ const func = async(url) => {
   // Wait for 10 seconds
   await setTimeout(10000);
   // Take a screenshot and save it
-  await page.screenshot({ path: './images/'+`screenshot.png` });
-  setTimeout(()=>{
-    require('fs').unlinkSync('./images/'+'screenshot.png')
-  },15000)
+  await page.screenshot({ path: './images/Monorix.png' });
+
   // Close the browser
 
 };
