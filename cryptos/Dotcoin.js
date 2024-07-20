@@ -69,7 +69,7 @@ async function saveCoins() {
 
   try {
     const response = await axios.post(url, data, { headers });
-    console.log(response.data);
+    // console.log(response.data);
   } catch (error) {
     console.error('Error making the request:', error);
   }
@@ -105,7 +105,7 @@ async function restoreAttempt() {
 
   try {
     const response = await axios.post(url, data, { headers });
-    console.log(response.data);
+    // console.log(response.data);
   } catch (error) {
     console.error('Error making the request:', error);
   }
