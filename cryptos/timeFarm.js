@@ -52,15 +52,20 @@ const func = async (url) => {
       // Navigate to the desired URL
       await page.goto(url);
       // Wait for 10 seconds
-      await setTimeout(10000);
-      await page.waitForSelector('.progress');
+      await setTimeout(1000);
+      // await page.waitForSelector('.progress');
 
       // Click on the element with the class name 'progress'
       setInterval(async ()=>{
-        await page.click('.progress');
-      // Take a screenshot and save it
-        await page.screenshot({ path: './images/TimeFarm.png' });
-      },100)
+          try {
+            await page.screenshot({ path: './images/TimeFarm.png' });
+            // await page.click('.progress');
+            // Take a screenshot and save it
+           
+          } catch (error) {
+            console.log(error)
+          }
+      },1000)
      
      
   } catch (error) {

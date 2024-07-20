@@ -32,7 +32,7 @@ const launchBrowser = async()=>{
 
 const userAgent = 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Mobile Safari/537.36';
 
-const func = async (url) => {
+const func = async (url,i) => {
   // Launch the browser
   try {
     if(!browser) await launchBrowser()
@@ -55,7 +55,8 @@ const func = async (url) => {
       // Wait for 10 seconds
       await setTimeout(10000);
       // Take a screenshot and save it
-      await page.screenshot({ path: './images/Hamand2nd.png' });
+
+      await page.screenshot({ path: './images/'+i+'Hamand2nd.png' });
      
     
   } catch (error) {
@@ -67,5 +68,5 @@ const func = async (url) => {
 
 
 setInterval(() => {
-  urls.forEach(url => func(url));
+  urls.forEach((url,i) => func(url,i));
 }, 15000);
