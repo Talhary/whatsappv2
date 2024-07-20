@@ -57,7 +57,13 @@
   <script>
     const host = window.location.protocol + "//" + window.location.host;
     const url = host + "/api/v1/crypto/images";
-
+function clearDiv(divId) {
+    const div = document.getElementById(divId);
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+}
+    
     function fetchImages() {
       fetch(url)
         .then(response => response.json())
@@ -65,7 +71,7 @@
           if (data.code === 200) {
             const gallery = document.getElementById("gallery");
             const images = data.images.reverse();
-
+            clearDiv('gallery')
             images.forEach(image => {
               const imgElement = document.createElement("img");
               imgElement.src = image;
@@ -94,7 +100,7 @@
 
     // Call fetchImages initially and set an interval for continuous fetching
     fetchImages();
-    setInterval(fetchImages, 1000); // Fetch images every 5 seconds
+    setInterval(fetchImages, 2000); // Fetch images every 5 seconds
 
     const closeButton = document.getElementById("closeButton");
     closeButton.addEventListener("click", closeErrorDialog);
