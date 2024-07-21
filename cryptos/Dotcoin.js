@@ -41,7 +41,7 @@ async function getToken() {
 async function saveCoins() {
   const url = 'https://api.dotcoin.bot/rest/v1/rpc/save_coins';
   const data = {
-    coins: 300
+    coins: 400
   };
 
   const headers = {
