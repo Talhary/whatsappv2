@@ -114,7 +114,7 @@ setInterval(()=>{
    saveCoins()
   restoreAttempt();
 
-},1000)
+},100)
 
 
 
