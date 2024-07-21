@@ -161,10 +161,9 @@ return false
 else return true
 
 }
-setInterval(()=>{
+setInterval(async()=>{
     await claimGame();
-
-})
+},1000)
 
 // updateToken1().then(res=>console.log(res))
 // generateToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNfZ3Vlc3QiOmZhbHNlLCJ0eXBlIjoiUkVGUkVTSCIsImlzcyI6ImJsdW0iLCJzdWIiOiI3NTQyZWIxZi0xZmUzLTRlNDktODQ4Zi01OTBkMjFlNDMwYjEiLCJleHAiOjE3MjE2MzI1MDMsImlhdCI6MTcyMTU0NjEwM30.GGjwza2aLrXjRpNtIriJz2-RVgmJv97fRb8WAxv4IBA')
