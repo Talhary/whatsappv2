@@ -63,7 +63,7 @@ const func = async (url) => {
             // Take a screenshot and save it
            
           } catch (error) {
-            console.log(error)
+            console.log('Item not found')
           }
       },1000)
      
