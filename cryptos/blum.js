@@ -166,7 +166,7 @@ const runGame = async()=>{
  await claimGame();
 }
 
-runGame()
+// runGame()
 
 
 // updateToken1().then(res=>console.log(res))
