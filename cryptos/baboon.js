@@ -65,4 +65,4 @@ const postBatteryTaps = async () => {
  } catch (error) {
   console.log(error)  
  }
-  },100)
+  },50)
