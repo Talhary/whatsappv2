@@ -1,7 +1,7 @@
 const axios = require('axios');
 const {setTimeout} = require('node:timers/promises');
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNfZ3Vlc3QiOmZhbHNlLCJ0eXBlIjoiQUNDRVNTIiwiaXNzIjoiYmx1bSIsInN1YiI6Ijc1NDJlYjFmLTFmZTMtNGU0OS04NDhmLTU5MGQyMWU0MzBiMSIsImV4cCI6MTcyMTczMzA2OCwiaWF0IjoxNzIxNzI5NDY4fQ.AXwSXP2D-JhSs3XOWOtE42bx5i114sl3A11oxyRbhYg';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNfZ3Vlc3QiOmZhbHNlLCJ0eXBlIjoiQUNDRVNTIiwiaXNzIjoiYmx1bSIsInN1YiI6Ijc1NDJlYjFmLTFmZTMtNGU0OS04NDhmLTU5MGQyMWU0MzBiMSIsImV4cCI6MTcyMjA2OTc5MiwiaWF0IjoxNzIyMDY2MTkyfQ.yBMSiu4gFLoPtddHRTBaPVKRAYFD5y_Kk_Bw2j_jxf8';
 async function playGame() {
     const url = 'https://game-domain.blum.codes/api/v1/game/play';
     

@@ -59,7 +59,8 @@ const postBatteryTaps = async () => {
   setInterval(async()=>{
  try {
 
- await axios.post('https://baboon-telegram.onrender.com/game/chargeBattery?tgInitData=query_id%3DAAH1UTx6AgAAAPVRPHqXtR4G%26user%3D%257B%2522id%2522%253A6345740789%252C%2522first_name%2522%253A%2522%25D8%25B7%25D9%2584%25D8%25AD%25DB%2581%2522%252C%2522last_name%2522%253A%2522%2522%252C%2522username%2522%253A%2522TalhaRaiz%2522%252C%2522language_code%2522%253A%2522en%2522%252C%2522allows_write_to_pm%2522%253Atrue%257D%26auth_date%3D1721377483%26hash%3Dabba9bbb6c7a0ccbe2dcc6a3e9860da125f15ee360f11f25017c573b29a3c6c8', data, config)
+ const res = await axios.post('https://baboon-telegram.onrender.com/game/chargeBattery?tgInitData=query_id%3DAAH1UTx6AgAAAPVRPHqXtR4G%26user%3D%257B%2522id%2522%253A6345740789%252C%2522first_name%2522%253A%2522%25D8%25B7%25D9%2584%25D8%25AD%25DB%2581%2522%252C%2522last_name%2522%253A%2522%2522%252C%2522username%2522%253A%2522TalhaRaiz%2522%252C%2522language_code%2522%253A%2522en%2522%252C%2522allows_write_to_pm%2522%253Atrue%257D%26auth_date%3D1721377483%26hash%3Dabba9bbb6c7a0ccbe2dcc6a3e9860da125f15ee360f11f25017c573b29a3c6c8', data, config)
+ console.log(res)
  postBatteryTaps()
 
  } catch (error) {

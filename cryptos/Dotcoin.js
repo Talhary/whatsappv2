@@ -41,11 +41,11 @@ async function getToken() {
 async function saveCoins() {
   const url = 'https://api.dotcoin.bot/rest/v1/rpc/save_coins';
   const data = {
-    coins: 400
+    coins: 10000
   };
 
   const headers = {
-    'content-length': 13,
+    'content-length': 15,
     'x-client-info': 'postgrest-js/0.0.0-automated',
     'sec-ch-ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
     'sec-ch-ua-mobile': '?1',
@@ -69,6 +69,7 @@ async function saveCoins() {
 
   try {
     const response = await axios.post(url, data, { headers });
+    return response.data
     // console.log(response.data);
   } catch (error) {
     console.error('Error making the request:', error);
@@ -110,11 +111,12 @@ async function restoreAttempt() {
     console.error('Error making the request:', error);
   }
 }
-setInterval(()=>{
-   saveCoins()
-  restoreAttempt();
+saveCoins().then(res=>console.log(res))
+// setInterval(()=>{
+//    saveCoins()
+//   restoreAttempt();
 
-},1000)
+// },1000)
 
 
 
