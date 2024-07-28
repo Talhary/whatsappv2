@@ -1,24 +1,4 @@
-const sessionName = "Talha";
-const owner = ["966541433942"];
-const QRCode = require("qrcode");
-require('./cryptos/index.js')
-const {
-  default: sansekaiConnect,
-  useMultiFileAuthState,
-  DisconnectReason,
-  fetchLatestBaileysVersion,
-  generateForwardMessageContent,
-  prepareWAMessageMedia,
-  generateWAMessageFromContent,
-  generateMessageID,
-  downloadContentFromMessage,
-  makeInMemoryStore,
-  jidDecode,
-  proto,
-  getContentType,
-  makeWASocket,
-  makeCacheableSignalKeyStore,
-} = require("@whiskeysockets/baileys");
+
 // require('./ws.js')
 const connect = require("./mongo/index");
 const CredsModels = require("./mongo/model/creds");
@@ -30,29 +10,7 @@ require("dotenv").config();
 const port = process.env.PORT || 3551;
 const AllowedUsers = require("./mongo/model/allowed");
 const fsPromises = require('fs/promises')
-// Middleware to calculate and log the current URL
-// app.use((req, res, next) => {
-//   const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-//   console.log('Current URL:', fullUrl);
-//   setTimeout(async ()=>{
-//    try {
-//     await axios.get(`${req.protocol}://${req.get('host')}`)
-//    } catch (error) {
-//     console.log(' error ')
-//    }
-//   console.log('sended')
-// },20000)
-//   next(); // Move to the next middleware or route handler
-// });
-//  setInterval(async ()=>{
-//    try {
-//     await axios.get(`https://whatsapp-bot-new-bot-65c6e4e95b06.herokuapp.com/`)
-//    } catch (error) {
-//     console.log(' error ')
-//    }
 
-// },20000)
-// Static file middleware
 
 const session = require('express-session');
 const passport = require('passport');
@@ -61,20 +19,20 @@ const isAuthenticated = require('./ middleware/auth.js');
 
 
 app.use(express.json());
-// Configure session management
+
 app.use(session({
     secret: 'your_secret_key',
     resave: false,
     saveUninitialized: false
 }));
 
-// Initialize Passport and session
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Define a simple user authentication strategy
+
 passport.use(new LocalStrategy((username, password, done) => {
-    // Replace with your user authentication logic
+   
     if (username === 'adminfdsdfkls' && password === 'passwordfsddfsdfsdfs') {
         return done(null, { id: 1, username: 'admin' });
     }
