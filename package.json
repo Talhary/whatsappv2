@@ -1,6 +1,6 @@
 {
     "name": "Whatsapp-chatgpt",
-    "version": "1",
+    "version": "1.0.0",
     "description": "WHATSAPP CHATGPT BOT, USING OPENAI",
     "main": "index.js",
     "type": "commonjs",
