@@ -1,5 +1,8 @@
 {
     "name": "Whatsapp-chatgpt",
+    "engines": {
+    "node": "22.x"
+     },
     "version": "1.0.0",
     "description": "WHATSAPP CHATGPT BOT, USING OPENAI",
     "main": "index.js",
