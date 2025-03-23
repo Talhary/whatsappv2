@@ -21,7 +21,7 @@ const gptBing = require("./lib/GptBing.js");
 const wa = require("@whiskeysockets/baileys");
 const fs = require("fs");
 const util = require("util");
-const chalk = require("chalk");
+
 const { jsPDF } = require("jspdf");
 const sendFileFromExtension = require("./lib/sendfileusingextension");
 const downloadv1 = require("./lib/downloadv1.js");
@@ -72,7 +72,7 @@ const gimage = require("./lib/gimage.js");
 const ytaFromText = require("./lib/ytafromtext.js");
 const ttsv3 = require("./lib/ttsv3.js");
 const gptUrl = require("./lib/gptUrl.js");
-const instaDl = require("./lib/insta.js");
+const {instaDl} = require("./lib/insta-dl.js");
 const wiki1 = require("./lib/wiki.js");
 const fb = require("./lib/fb.js");
 const ytNew = require("./lib/ytNew.js");
@@ -778,7 +778,7 @@ const bardTools = async (client, m, budy) => {
       response.data.candidates[0].content.parts[0].functionCall?.args
         .extension == "default_api"
     ) {
-      bardTools(client, m, budy);
+      // bardTools(client, m, budy);
       return;
     }
     const newData = {
@@ -928,12 +928,13 @@ const CheckPerson = async (client, id) => {
 };
 
 module.exports = sansekai = async (client, m, chatUpdate, store, king) => {
+ 
   // console.log(king)
-
+// console.log(client)
   //if (!(await CheckPerson(client, m.sender)))
   //return client.sendMessage(m.sender, {
   //   text: "Please Join group to use this bot. https://chat.whatsapp.com/CaVyaUx1uGz3YthFwnjwSW",
-   //});
+  //});
 
   if (m.isGroup) {
     console.log(m);
@@ -941,7 +942,7 @@ module.exports = sansekai = async (client, m, chatUpdate, store, king) => {
   }
   // const u = await UserModel.find({})
   // console.log(u.length, "Users length");
-  console.log("running main");
+
   const { parseDomain } = await import("parse-domain");
   const id = m.sender;
 
@@ -1036,7 +1037,7 @@ module.exports = sansekai = async (client, m, chatUpdate, store, king) => {
     const mek = chatUpdate.messages[0];
 
     const color = (text, color) => {
-      return !color ? chalk.green(text) : chalk.keyword(color)(text);
+      return text;
     };
 
     // Group
@@ -1052,24 +1053,8 @@ module.exports = sansekai = async (client, m, chatUpdate, store, king) => {
       // Push Message To Console && Auto Read
       if (argsLog && !m.isGroup) {
         // client.sendReadReceipt(m.chat, m.sender, [m.key.id])
-        console.log(
-          chalk.black(chalk.bgWhite("[ LOGS ]")),
-          color(argsLog, "turquoise"),
-          chalk.magenta("From"),
-          chalk.green(pushname),
-          chalk.yellow(`[ ${m.sender.replace("@s.whatsapp.net", "")} ]`)
-        );
       } else if (argsLog && m.isGroup) {
         // client.sendReadReceipt(m.chat, m.sender, [m.key.id])
-        console.log(
-          chalk.black(chalk.bgWhite("[ LOGS ]")),
-          color(argsLog, "turquoise"),
-          chalk.magenta("From"),
-          chalk.green(pushname),
-          chalk.yellow(`[ ${m.sender.replace("@s.whatsapp.net", "")} ]`),
-          chalk.blueBright("IN"),
-          chalk.green(groupName)
-        );
       }
     }
     let isIntervalSet = false;
@@ -1298,8 +1283,8 @@ module.exports = sansekai = async (client, m, chatUpdate, store, king) => {
             return;
           } else if (
             domain === "facebook" ||
-            domain === "fb" ||
-            domain == "instagram"
+            domain === "fb" 
+            // domain == "instagram"
           ) {
             FbNayan(client, m, budy);
             return;
@@ -1426,11 +1411,11 @@ module.exports = sansekai = async (client, m, chatUpdate, store, king) => {
         //   let lang = budy.split(" ")[1];
         //   EcoRefer(client, m, lang);
         // }
-      //  else if (command == "acc") {
-         // let lang = budy.split(" ")[1];
+        //  else if (command == "acc") {
+        // let lang = budy.split(" ")[1];
         //  acc_refer(client, m, lang);
-      //  }
-      else if (command == "ytd") {
+        //  }
+        else if (command == "ytd") {
           console.log("runnig ytd sensekai");
           let lang = budy.split(" ")[1];
           getYtvieo(client, m, lang);

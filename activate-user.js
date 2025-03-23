@@ -1,44 +1,41 @@
 const sessionName = "Talha";
 const owner = ["966541433942"];
+const main = require("./main")
 const QRCode = require("qrcode");
 const connect = require("./mongo/index");
 const CredsModels = require("./mongo/model/creds");
 const express = require("express");
-const path = require("path");
-const app = express();
+
 
 const {
   default: sansekaiConnect,
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
-  generateForwardMessageContent,
-  prepareWAMessageMedia,
-  generateWAMessageFromContent,
-  generateMessageID,
+
   downloadContentFromMessage,
   makeInMemoryStore,
   jidDecode,
   proto,
   getContentType,
-  makeWASocket,
+
   makeCacheableSignalKeyStore,
 } = require("@whiskeysockets/baileys");
-const activate = async(user)=>{
-      const FileType = await import("file-type");
+const activate = async (user) => {
+  const FileType = await import("file-type");
 
   const pino = require("pino");
   const { Boom } = require("@hapi/boom");
   const fs = require("fs");
   const axios = require("axios");
-  const chalk = require("chalk");
+
   const figlet = require("figlet");
   const _ = require("lodash");
   const PhoneNumber = require("awesome-phonenumber");
   const logger = pino().child({ level: "silent", stream: "store" });
 
-    try {
-          if (!fs.existsSync("./Configs")) fs.mkdirSync("./Configs");
+  try {
+    if (!fs.existsSync("./Configs")) fs.mkdirSync("./Configs");
     if (!fs.existsSync("./Configs/" + user.name))
       fs.mkdirSync("./Configs/" + user.name);
     if (!fs.existsSync("./Configs/" + user.name + "./creds.json")) {
@@ -71,7 +68,7 @@ const activate = async(user)=>{
     });
 
     const color = (text, color) => {
-      return !color ? chalk.green(text) : chalk.keyword(color)(text);
+      return text;
     };
 
     function smsg(conn, m, store) {
@@ -247,9 +244,14 @@ const activate = async(user)=>{
       store.bind(client.ev);
 
       client.ev.on("messages.upsert", async (chatUpdate) => {
-        // console.log(chatUpdate)
-        //console.log(JSON.stringify(chatUpdate, undefined, 2))
+        if(chatUpdate.type=='append') {
+          console.log('append called')
+          
+          return}
+          console.log('normal called')
+
         try {
+          
           mek = chatUpdate.messages[0];
           if (!mek.message) return;
           mek.message =
@@ -262,8 +264,8 @@ const activate = async(user)=>{
           if (mek.key.id.startsWith("BAE5") && mek.key.id.length === 16) return;
 
           m = smsg(client, mek, store);
-
-          require("./main")(client, m, chatUpdate, store, userId);
+          console.log('called')
+          main(client, m, chatUpdate, store, userId);
         } catch (err) {
           console.log(err);
         }
@@ -564,23 +566,20 @@ const activate = async(user)=>{
     let file = require.resolve(__filename);
     fs.watchFile(file, () => {
       fs.unwatchFile(file);
-      console.log(chalk.redBright(`Update ${__filename}`));
+
       delete require.cache[file];
       require(file);
     });
-    } catch (error) {
-        
-    }
-}
+  } catch (error) {}
+};
 const start = async () => {
   try {
     await connect();
     console.log("conencted to DB");
-
   } catch (err) {
     console.log(err);
   }
 };
 start();
 
-module.exports = activate
+module.exports = activate;
