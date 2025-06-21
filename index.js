@@ -197,17 +197,9 @@ setInterval(async () => {
 //   } catch (error) {}
 // }, 61000);
 const func = async () => {
-  const FileType = await import("file-type");
-
+  
   const pino = require("pino");
-  const { Boom } = require("@hapi/boom");
-  const fs = require("fs");
-  const axios = require("axios");
-  const chalk = require("chalk");
-  const figlet = require("figlet");
-  const _ = require("lodash");
-  const PhoneNumber = require("awesome-phonenumber");
-  const logger = pino().child({ level: "silent", stream: "store" });
+
 
   const users = await CredsModels.find({});
   // const obj = {
